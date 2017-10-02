@@ -39,5 +39,12 @@ namespace MegaDesk_3_MarcoMorley1
             addQuote.Show();
            
         }
+
+        private void viewQuote1_Click(object sender, EventArgs e)
+        {
+            ViewAllQuotes viewquotes= new ViewAllQuotes();
+            //this.Hide();
+            viewquotes.Show();
+        }
     }
 }

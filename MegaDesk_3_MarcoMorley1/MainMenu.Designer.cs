@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.addNewQuote = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.viewQuote1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -49,16 +49,17 @@
             this.addNewQuote.UseVisualStyleBackColor = true;
             this.addNewQuote.Click += new System.EventHandler(this.addNewQuote_Click_1);
             // 
-            // button2
+            // viewQuote1
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(192, 231);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(112, 35);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "View Quotes";
-            this.button2.UseVisualStyleBackColor = true;
+            this.viewQuote1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.viewQuote1.Location = new System.Drawing.Point(192, 231);
+            this.viewQuote1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.viewQuote1.Name = "viewQuote1";
+            this.viewQuote1.Size = new System.Drawing.Size(112, 35);
+            this.viewQuote1.TabIndex = 2;
+            this.viewQuote1.Text = "View Quotes";
+            this.viewQuote1.UseVisualStyleBackColor = true;
+            this.viewQuote1.Click += new System.EventHandler(this.viewQuote1_Click);
             // 
             // button3
             // 
@@ -100,7 +101,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.viewQuote1);
             this.Controls.Add(this.addNewQuote);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -113,7 +114,7 @@
 
         #endregion
         private System.Windows.Forms.Button addNewQuote;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button viewQuote1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.PictureBox pictureBox1;
