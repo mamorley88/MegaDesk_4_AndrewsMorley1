@@ -35,8 +35,9 @@ namespace MegaDesk_3_MarcoMorley1
         private void addNewQuote_Click_1(object sender, EventArgs e)
         {
             addQuote1 addQuote = new addQuote1();
+            //this.Hide();
             addQuote.Show();
-            this.Hide();
+           
         }
     }
 }

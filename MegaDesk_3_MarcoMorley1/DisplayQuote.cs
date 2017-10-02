@@ -16,27 +16,43 @@ namespace MegaDesk_3_MarcoMorley1
         {
             InitializeComponent();
         }
-
-        private void saveText_Click(object sender, EventArgs e)
+        public void Initialize(DeskQuote dq)
         {
+            this.nameText.ReadOnly = false;
+            this.nameText.SelectedText = dq.name;
+            this.nameText.ReadOnly = true;
 
+            this.widthText.ReadOnly = false;
+            this.widthText.SelectedText = dq.width.ToString();
+            this.widthText.ReadOnly = true;
 
-            /*private void QuoteView_Load(object sender, EventArgs e)
-             }
+            this.depthText.ReadOnly = false;
+            this.depthText.SelectedText = dq.depth.ToString();
+            this.depthText.ReadOnly = true;
 
-             Public Sub WriteTextBoxTextToLabel(ByVal Txt As String)
-                nameBox.Text = Txt
-                 End Sub
+            this.drawerText.ReadOnly = false;
+            this.drawerText.SelectedText = dq.drawers.ToString();
+            this.drawerText.ReadOnly = true;
 
+            this.materialText.ReadOnly = false;
+            this.materialText.SelectedText = dq.getMaterial();
+            this.materialText.ReadOnly = true;
 
-                 nameBox.Text = Name.text;
-                 widthBox.Text = Width;
-                 depthBox.Text = Depth;
-                 drawerBox.Text = Drawer;
-                 woodBox.Text = Wood;
-                 rushBox.Text = Rush;*/
+            this.rushText.ReadOnly = false;
+            this.rushText.SelectedText = dq.getRush();
+            this.rushText.ReadOnly = true;
 
+            this.priceText.ReadOnly = false;
+            this.priceText.SelectedText = "$ " + dq.price.ToString();
+            this.priceText.ReadOnly = true;
+
+            this.dateText.ReadOnly = false;
+            this.dateText.SelectedText = dq.date.ToString("yyyy-MM-dd HH:mm:ss tt");
+            this.dateText.ReadOnly = true;
         }
+       
+
+        
     }
 
 }

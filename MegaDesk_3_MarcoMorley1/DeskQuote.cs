@@ -9,25 +9,93 @@ namespace MegaDesk_3_MarcoMorley1
     
     public class DeskQuote : Object
     {
-        enum MATERIALS { LAMINATE = 0, OAK = 1, ROSEWOOD = 2, VENEER = 3, PINE = 4 };
-        enum RUSH { NO_RUSH, THREE, FIVE, SEVEN };
-        string name;
-        int width;
-        int depth;
-        int drawers;
-        MATERIALS material;
-        RUSH rush;
-        double price;
-        DateTime date;
+        public enum MATERIALS { LAMINATE = 0, OAK = 1, ROSEWOOD = 2, VENEER = 3, PINE = 4 };
+        public enum RUSH { NO_RUSH, THREE, FIVE, SEVEN };
+        public string name;
+        public int width;
+        public int depth;
+        public int drawers;
+        public MATERIALS material;
+        public RUSH rush;
+        public double price;
+        public DateTime date;
         double price_per_sqin = 1.00;
 
         public DeskQuote(string name, int width, int depth, int drawers, int material, int rush)
         {
+            this.name = name;
+            this.width = width;
+            this.depth = depth;
+            this.drawers = drawers;
             this.material = (MATERIALS)material;
             this.rush = (RUSH)rush;
-            this.calculatePrice();
+            try {
+                this.calculatePrice();
+            }
+            catch (Exception exception)
+            {
+
+            }
+
             this.date = DateTime.Now;
         }
+
+        public string getRush()
+        {
+            string rv = "";
+
+            switch (this.rush)
+            {
+                case RUSH.NO_RUSH:
+                    rv = "No Rush";
+                    break;
+
+                case RUSH.THREE:
+                    rv = "3 days";
+                    break;
+
+                case RUSH.FIVE:
+                    rv = "5 Days";
+                    break;
+
+                case RUSH.SEVEN:
+                    rv = "7 Days";
+                    break;
+
+            }
+            return rv;
+        }
+        public string getMaterial()
+        {
+            string rv = "";
+
+            switch (this.material)
+            {
+                case MATERIALS.LAMINATE:
+                    rv = "Laminate";
+                    break;
+
+                case MATERIALS.OAK:
+                   rv = "Oak";
+                    break;
+
+                case MATERIALS.ROSEWOOD:
+                    rv = "Rosewood";
+                    break;
+
+                case MATERIALS.VENEER:
+                    rv = "Veneer";
+                    break;
+
+                case MATERIALS.PINE:
+                    rv = "Pine";
+                    break;
+
+                
+            }
+            return rv;
+        }
+
         private void calculatePrice()
         {
             this.price = 200.0;

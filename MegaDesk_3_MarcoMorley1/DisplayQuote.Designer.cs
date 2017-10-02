@@ -132,7 +132,7 @@
             this.nameText.MaxLength = 255;
             this.nameText.Name = "nameText";
             this.nameText.ReadOnly = true;
-            this.nameText.Size = new System.Drawing.Size(100, 20);
+            this.nameText.Size = new System.Drawing.Size(131, 20);
             this.nameText.TabIndex = 18;
             // 
             // drawerText
@@ -141,7 +141,7 @@
             this.drawerText.MaxLength = 255;
             this.drawerText.Name = "drawerText";
             this.drawerText.ReadOnly = true;
-            this.drawerText.Size = new System.Drawing.Size(100, 20);
+            this.drawerText.Size = new System.Drawing.Size(131, 20);
             this.drawerText.TabIndex = 19;
             // 
             // depthText
@@ -150,7 +150,7 @@
             this.depthText.MaxLength = 255;
             this.depthText.Name = "depthText";
             this.depthText.ReadOnly = true;
-            this.depthText.Size = new System.Drawing.Size(100, 20);
+            this.depthText.Size = new System.Drawing.Size(131, 20);
             this.depthText.TabIndex = 20;
             // 
             // widthText
@@ -159,7 +159,7 @@
             this.widthText.MaxLength = 255;
             this.widthText.Name = "widthText";
             this.widthText.ReadOnly = true;
-            this.widthText.Size = new System.Drawing.Size(100, 20);
+            this.widthText.Size = new System.Drawing.Size(131, 20);
             this.widthText.TabIndex = 21;
             // 
             // materialText
@@ -168,7 +168,7 @@
             this.materialText.MaxLength = 255;
             this.materialText.Name = "materialText";
             this.materialText.ReadOnly = true;
-            this.materialText.Size = new System.Drawing.Size(100, 20);
+            this.materialText.Size = new System.Drawing.Size(131, 20);
             this.materialText.TabIndex = 22;
             // 
             // rushText
@@ -177,7 +177,7 @@
             this.rushText.MaxLength = 255;
             this.rushText.Name = "rushText";
             this.rushText.ReadOnly = true;
-            this.rushText.Size = new System.Drawing.Size(100, 20);
+            this.rushText.Size = new System.Drawing.Size(131, 20);
             this.rushText.TabIndex = 23;
             // 
             // dateText
@@ -186,7 +186,7 @@
             this.dateText.MaxLength = 255;
             this.dateText.Name = "dateText";
             this.dateText.ReadOnly = true;
-            this.dateText.Size = new System.Drawing.Size(100, 20);
+            this.dateText.Size = new System.Drawing.Size(131, 20);
             this.dateText.TabIndex = 24;
             // 
             // priceText
@@ -195,7 +195,7 @@
             this.priceText.MaxLength = 255;
             this.priceText.Name = "priceText";
             this.priceText.ReadOnly = true;
-            this.priceText.Size = new System.Drawing.Size(100, 20);
+            this.priceText.Size = new System.Drawing.Size(131, 20);
             this.priceText.TabIndex = 25;
             // 
             // DisplayQuote
