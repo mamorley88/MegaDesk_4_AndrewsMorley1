@@ -44,8 +44,6 @@ namespace MegaDesk_3_MarcoMorley1
             dq.ShowDialog();
 
         }
-
-
         private DeskQuote[] readFromCsv()
         {
             var quotesList = new List<DeskQuote>();
@@ -76,7 +74,6 @@ namespace MegaDesk_3_MarcoMorley1
             }
             return quotesList.ToArray();
         }
-
         private DeskQuote saveToCsv(DeskQuote[] quotes)
 
         {
