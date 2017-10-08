@@ -9,25 +9,19 @@ namespace MegaDesk_3_MarcoMorley1
     
     public class DeskQuote : Object
     {
-        public enum MATERIALS { LAMINATE = 0, OAK = 1, ROSEWOOD = 2, VENEER = 3, PINE = 4 };
+       
         public enum RUSH { NO_RUSH, THREE, FIVE, SEVEN };
+        public Desk desk;
         public string name;
-        public int width;
-        public int depth;
-        public int drawers;
-        public MATERIALS material;
         public RUSH rush;
         public double price;
         public DateTime date;
         double price_per_sqin = 1.00;
 
-        public DeskQuote(string name, int width, int depth, int drawers, int material, int rush)
+        public DeskQuote(string name, int rush)
         {
             this.name = name;
-            this.width = width;
-            this.depth = depth;
-            this.drawers = drawers;
-            this.material = (MATERIALS)material;
+           
             this.rush = (RUSH)rush;
             try {
                 this.calculatePrice();
@@ -65,61 +59,31 @@ namespace MegaDesk_3_MarcoMorley1
             }
             return rv;
         }
-        public string getMaterial()
-        {
-            string rv = "";
-
-            switch (this.material)
-            {
-                case MATERIALS.LAMINATE:
-                    rv = "Laminate";
-                    break;
-
-                case MATERIALS.OAK:
-                   rv = "Oak";
-                    break;
-
-                case MATERIALS.ROSEWOOD:
-                    rv = "Rosewood";
-                    break;
-
-                case MATERIALS.VENEER:
-                    rv = "Veneer";
-                    break;
-
-                case MATERIALS.PINE:
-                    rv = "Pine";
-                    break;
-
-                
-            }
-            return rv;
-        }
-
+       
         private void calculatePrice()
         {
             this.price = 200.0;
-            this.price += 50 * this.drawers;
+            this.price += 50 * desk.drawers;
 
-            switch (this.material)
+            switch (desk.material)
             {
-                case MATERIALS.LAMINATE:
+                case Desk.MATERIALS.LAMINATE:
                     this.price += 100.0;
                     break;
 
-                case MATERIALS.OAK:
+                case Desk.MATERIALS.OAK:
                     this.price += 200.0;
                     break;
 
-                case MATERIALS.ROSEWOOD:
+                case Desk.MATERIALS.ROSEWOOD:
                     this.price += 300.0;
                     break;
 
-                case MATERIALS.VENEER:
+                case Desk.MATERIALS.VENEER:
                     this.price += 125.0;
                     break;
 
-                case MATERIALS.PINE:
+                case Desk.MATERIALS.PINE:
                     this.price += 50.0;
                     break;
 
@@ -127,7 +91,7 @@ namespace MegaDesk_3_MarcoMorley1
                     throw new Exception("Invalid material selected");
             }
 
-            int surfacearea = this.depth * this.width;
+            int surfacearea = desk.depth * desk.width;
 
             if (surfacearea > 1000)
             {

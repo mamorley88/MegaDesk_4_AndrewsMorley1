@@ -44,6 +44,8 @@
             this.numDrawers = new System.Windows.Forms.NumericUpDown();
             this.woodChoice = new System.Windows.Forms.ComboBox();
             this.rushOrderDays = new System.Windows.Forms.ComboBox();
+            this.depthError = new System.Windows.Forms.Label();
+            this.widthError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.widthInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.depthInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDrawers)).BeginInit();
@@ -244,11 +246,31 @@
             this.rushOrderDays.Size = new System.Drawing.Size(121, 21);
             this.rushOrderDays.TabIndex = 35;
             // 
+            // depthError
+            // 
+            this.depthError.AutoSize = true;
+            this.depthError.Location = new System.Drawing.Point(172, 166);
+            this.depthError.Name = "depthError";
+            this.depthError.Size = new System.Drawing.Size(55, 13);
+            this.depthError.TabIndex = 36;
+            this.depthError.Text = "deptherror";
+            // 
+            // widthError
+            // 
+            this.widthError.AutoSize = true;
+            this.widthError.Location = new System.Drawing.Point(176, 109);
+            this.widthError.Name = "widthError";
+            this.widthError.Size = new System.Drawing.Size(54, 13);
+            this.widthError.TabIndex = 37;
+            this.widthError.Text = "widthError";
+            // 
             // addQuote1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.widthError);
+            this.Controls.Add(this.depthError);
             this.Controls.Add(this.rushOrderDays);
             this.Controls.Add(this.woodChoice);
             this.Controls.Add(this.numDrawers);
@@ -294,5 +316,7 @@
         private System.Windows.Forms.NumericUpDown numDrawers;
         private System.Windows.Forms.ComboBox woodChoice;
         private System.Windows.Forms.ComboBox rushOrderDays;
+        private System.Windows.Forms.Label depthError;
+        private System.Windows.Forms.Label widthError;
     }
 }

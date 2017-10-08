@@ -23,19 +23,19 @@ namespace MegaDesk_3_MarcoMorley1
             this.nameText.ReadOnly = true;
 
             this.widthText.ReadOnly = false;
-            this.widthText.SelectedText = dq.width.ToString();
+            this.widthText.SelectedText = dq.desk.width.ToString();
             this.widthText.ReadOnly = true;
 
             this.depthText.ReadOnly = false;
-            this.depthText.SelectedText = dq.depth.ToString();
+            this.depthText.SelectedText = dq.desk.depth.ToString();
             this.depthText.ReadOnly = true;
 
             this.drawerText.ReadOnly = false;
-            this.drawerText.SelectedText = dq.drawers.ToString();
+            this.drawerText.SelectedText = dq.desk.drawers.ToString();
             this.drawerText.ReadOnly = true;
 
             this.materialText.ReadOnly = false;
-            this.materialText.SelectedText = dq.getMaterial();
+            this.materialText.SelectedText = dq.desk.getMaterial();
             this.materialText.ReadOnly = true;
 
             this.rushText.ReadOnly = false;

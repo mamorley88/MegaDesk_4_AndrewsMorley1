@@ -16,7 +16,12 @@ namespace MegaDesk_3_MarcoMorley1
         public ViewAllQuotes()
         {
             InitializeComponent();
-            this.richTextBox.Text = File.ReadAllText(@".\quotes.txt");
+            string path = ".\\quotes.txt";
+            if (!File.Exists(path))
+            {
+                return; 
+                    }
+            this.richTextBox.Text = File.ReadAllText(path);
 
         }
     }
