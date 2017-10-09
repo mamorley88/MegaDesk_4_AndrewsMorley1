@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using MegaDesk_3_MarcoMorley1;
+using Newtonsoft.Json;
 
 namespace MegaDesk_3_MarcoMorley1
 {
@@ -18,10 +19,32 @@ namespace MegaDesk_3_MarcoMorley1
     {
 
         object parent = null;
+        List<Desk.DesktopMaterial> materials;
+        List<DeskQuote.RUSH> rushOptions;
 
         public addQuote1()
         {
             InitializeComponent();
+            materials = new List<Desk.DesktopMaterial>()
+            {
+                Desk.DesktopMaterial.LAMINATE,
+                Desk.DesktopMaterial.OAK,
+                Desk.DesktopMaterial.PINE,
+                Desk.DesktopMaterial.ROSEWOOD,
+                Desk.DesktopMaterial.VENEER
+            };
+            materialChoice.DataSource = materials;
+
+
+            rushOptions = new List<DeskQuote.RUSH>()
+            {
+                DeskQuote.RUSH.NO_RUSH,
+                DeskQuote.RUSH.THREE,
+                DeskQuote.RUSH.FIVE,
+                DeskQuote.RUSH.SEVEN
+
+            };
+            rushOrderDays.DataSource = rushOptions;
 
         }
 
@@ -36,72 +59,54 @@ namespace MegaDesk_3_MarcoMorley1
 
         private void saveText_Click(object sender, EventArgs e)
         {
-            DeskQuote[] quotes = this.readFromCsv();
+            DeskQuote[] quotes = this.deserialize();
 
-            DeskQuote deskQuote = this.saveToCsv(quotes);
+            DeskQuote deskQuote = this.serialize(quotes);
             DisplayQuote dq = new DisplayQuote();
             dq.Initialize(deskQuote);
             dq.ShowDialog();
 
         }
-        private DeskQuote[] readFromCsv()
+        private DeskQuote[] deserialize()
         {
             var quotesList = new List<DeskQuote>();
-            string path = ".\\quotes.txt";
+           
+
+            string path = ".\\quotes.json";
+
             if (!File.Exists(path))
             {
                 return quotesList.ToArray();
             }
             using (var rd = new StreamReader(path))
             {
-                while (!rd.EndOfStream)
-                {
-                    var splits = rd.ReadLine().Split(',');
-                    int width = Convert.ToInt32(splits[1]);
-                    int depth = Convert.ToInt32(splits[2]);
-                    int drawers = Convert.ToInt32(splits[3]);
+               quotesList= JsonConvert.DeserializeObject<List<DeskQuote>>(rd.ReadToEnd()) as List<DeskQuote>;
 
-                    Desk.MATERIALS material = (Desk.MATERIALS)Convert.ToInt32(splits[4]);
-                    DeskQuote.RUSH rush = (DeskQuote.RUSH)Convert.ToInt32(splits[5]);
-                    double price = Convert.ToDouble(splits[6]);
-                    DateTime date = DateTime.Parse(splits[7]);
-                    DeskQuote current = new DeskQuote(splits[0], (int)rush);
-                    current.price = price;
-                    current.date = date;
-                    quotesList.Add(current);
-
-                }
+               
             }
             return quotesList.ToArray();
         }
-        private DeskQuote saveToCsv(DeskQuote[] quotes)
+        private DeskQuote serialize(DeskQuote[] quotes)
 
         {
-            string path = ".\\quotes.txt";
+            string path = ".\\quotes.json";
             int width = Convert.ToInt32(Math.Round(this.widthInput.Value, 0));
             int depth = Convert.ToInt32(Math.Round(this.depthInput.Value, 0));
             int drawers = Convert.ToInt32(Math.Round(this.numDrawers.Value, 0));
-            DeskQuote current = new DeskQuote(this.nameBox.Text, this.rushOrderDays.SelectedIndex);
-
+            Desk desk = new Desk(width, depth, drawers, (Desk.DesktopMaterial)materialChoice.SelectedValue);
+            DeskQuote current = new DeskQuote(this.nameBox.Text, (int)this.rushOrderDays.SelectedValue, desk);
+           
+          
             using (var w = new StreamWriter(path))
             {
-                /*string header = "name,width, depth, drawers, material, rush, price, date";
-                w.WriteLine(header);
-                w.Flush();*/
+                List<DeskQuote> deskQuoteList = new List<DeskQuote>();
                 foreach (DeskQuote quote in quotes)
                 {
-
-                    var line = string.Format("{0},{1},{2},{3},{4},{5},{6},{7}",
-                        quote.name, quote.desk.width, quote.desk.depth, quote.desk.drawers,
-                       quote.desk.material, quote.rush, quote.price, quote.date.ToString("yyyy-MM-dd HH:mm:ss tt"));
-                    w.WriteLine(line);
-                    w.Flush();
+                    deskQuoteList.Add(quote);
                 }
-
-                var currentline = string.Format("{0},{1},{2},{3},{4},{5},{6},{7}",
-                      current.name, current.desk.width, current.desk.depth, current.desk.drawers,
-                      current.desk.material, current.rush, current.price, current.date.ToString(""));
-                w.WriteLine(currentline);
+                deskQuoteList.Add(current);
+                var json = JsonConvert.SerializeObject(deskQuoteList);
+                w.WriteLine (json.ToString());
                 w.Flush();
             }
             return current;
@@ -134,7 +139,7 @@ namespace MegaDesk_3_MarcoMorley1
             String result = depthInput.Value.ToString();
             if (result.IndexOf('.') >= 0)
             {
-                depthError.Text = "Invalide Integer";
+                depthError.Text = "Invalid Integer";
                 return;
             }
             depthError.Text = Desk.validateDepth((int)depthInput.Value);

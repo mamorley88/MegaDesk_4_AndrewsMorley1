@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,19 +11,26 @@ namespace MegaDesk_3_MarcoMorley1
     public class DeskQuote : Object
     {
        
-        public enum RUSH { NO_RUSH, THREE, FIVE, SEVEN };
+        public enum RUSH {  THREE, FIVE, SEVEN, NO_RUSH };
+        public enum DESKSIZE {UNDER_1K, UNDER_2K, OVER_2K, NO_SIZE };
         public Desk desk;
         public string name;
         public RUSH rush;
         public double price;
         public DateTime date;
         double price_per_sqin = 1.00;
+        static double[,] rushPrices;
 
-        public DeskQuote(string name, int rush)
+
+        
+        public DeskQuote(string name, int rush, Desk desk)
         {
             this.name = name;
-           
+            this.desk = desk;
             this.rush = (RUSH)rush;
+            getRushOrder();
+            this.date = DateTime.Now;
+
             try {
                 this.calculatePrice();
             }
@@ -31,125 +39,97 @@ namespace MegaDesk_3_MarcoMorley1
 
             }
 
-            this.date = DateTime.Now;
+
         }
 
         public string getRush()
         {
-            string rv = "";
+            return this.rush.ToString();
 
-            switch (this.rush)
+            //string rv = "";
+
+            //switch (this.rush)
+            //{
+            //    case RUSH.NO_RUSH:
+            //        rv = "No Rush";
+            //        break;
+
+            //    case RUSH.THREE:
+            //        rv = "3 days";
+            //        break;
+
+            //    case RUSH.FIVE:
+            //        rv = "5 Days";
+            //        break;
+
+            //    case RUSH.SEVEN:
+            //        rv = "7 Days";
+            //        break;
+
+            //}
+            //return rv;
+        }
+        public static void getRushOrder()
+        {
+            if (rushPrices == null)
             {
-                case RUSH.NO_RUSH:
-                    rv = "No Rush";
-                    break;
+                string filepath = ".\\rushOrderPrices.txt";
+                string[] lines = File.ReadAllLines(filepath);
+                int lineIndex = 0;
+                rushPrices = new double[(int) RUSH.NO_RUSH, (int) DESKSIZE.NO_SIZE];
 
-                case RUSH.THREE:
-                    rv = "3 days";
-                    break;
-
-                case RUSH.FIVE:
-                    rv = "5 Days";
-                    break;
-
-                case RUSH.SEVEN:
-                    rv = "7 Days";
-                    break;
-
+                for (int daysIndex = 0; daysIndex < (int) RUSH.NO_RUSH; daysIndex++ )
+                {
+                    for (int sizeIndex = 0; sizeIndex < (int) DESKSIZE.NO_SIZE; sizeIndex++ )
+                    {
+                        double value = 0.0;
+                        Double.TryParse(lines[lineIndex], out value);
+                        lineIndex++;
+                        rushPrices[daysIndex, sizeIndex] = value;
+                    }
+                }
             }
-            return rv;
+
         }
        
         private void calculatePrice()
         {
             this.price = 200.0;
             this.price += 50 * desk.drawers;
-
-            switch (desk.material)
-            {
-                case Desk.MATERIALS.LAMINATE:
-                    this.price += 100.0;
-                    break;
-
-                case Desk.MATERIALS.OAK:
-                    this.price += 200.0;
-                    break;
-
-                case Desk.MATERIALS.ROSEWOOD:
-                    this.price += 300.0;
-                    break;
-
-                case Desk.MATERIALS.VENEER:
-                    this.price += 125.0;
-                    break;
-
-                case Desk.MATERIALS.PINE:
-                    this.price += 50.0;
-                    break;
-
-                default:
-                    throw new Exception("Invalid material selected");
-            }
-
+            this.price += (double)this.desk.material;
+           
             int surfacearea = desk.depth * desk.width;
 
             if (surfacearea > 1000)
             {
                 this.price += surfacearea * this.price_per_sqin;
             }
-            switch (this.rush)
+          
+
+            if (this.rush < DeskQuote.RUSH.NO_RUSH)
             {
-                case RUSH.NO_RUSH:
-                    break;
+                int daysIndex = (int)this.rush;
+                int sizeIndex = -1;
 
-                case RUSH.THREE:
-                    if (surfacearea < 1000)
-                    {
-                        this.price += 60.0;
-                    }
-                    else if (surfacearea < 2000)
-                    {
-                        this.price += 70.0;
-                    }
-                    else
-                    {
-                        this.price += 80.0;
-                    }
-                    break;
+                if (surfacearea < 1000)
+                {
 
-                case RUSH.FIVE:
-                    if (surfacearea < 1000)
-                    {
-                        this.price += 40.0;
-                    }
-                    else if (surfacearea < 2000)
-                    {
-                        this.price += 50.0;
-                    }
-                    else
-                    {
-                        this.price += 60.0;
-                    }
-                    break;
-
-                case RUSH.SEVEN:
-                    if (surfacearea < 1000)
-                    {
-                        this.price += 30.0;
-                    }
-                    else if (surfacearea < 2000)
-                    {
-                        this.price += 35.0;
-                    }
-                    else
-                    {
-                        this.price += 40.0;
-                    }
-
-                    break;
-
+                    sizeIndex = (int)DeskQuote.DESKSIZE.UNDER_1K;
+                }
+                else if (surfacearea < 2000)
+                {
+                    sizeIndex = (int)DeskQuote.DESKSIZE.UNDER_2K;
+                }
+                else
+                {
+                    sizeIndex = (int)DeskQuote.DESKSIZE.OVER_2K;
+                }
+                this.price += rushPrices[daysIndex, sizeIndex];
             }
 
+            
+
+            
 
         }
     }

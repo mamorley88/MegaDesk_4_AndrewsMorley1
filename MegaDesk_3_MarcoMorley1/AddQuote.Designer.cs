@@ -42,7 +42,7 @@
             this.widthInput = new System.Windows.Forms.NumericUpDown();
             this.depthInput = new System.Windows.Forms.NumericUpDown();
             this.numDrawers = new System.Windows.Forms.NumericUpDown();
-            this.woodChoice = new System.Windows.Forms.ComboBox();
+            this.materialChoice = new System.Windows.Forms.ComboBox();
             this.rushOrderDays = new System.Windows.Forms.ComboBox();
             this.depthError = new System.Windows.Forms.Label();
             this.widthError = new System.Windows.Forms.Label();
@@ -217,20 +217,14 @@
             this.numDrawers.Size = new System.Drawing.Size(120, 20);
             this.numDrawers.TabIndex = 33;
             // 
-            // woodChoice
+            // materialChoice
             // 
-            this.woodChoice.FormattingEnabled = true;
-            this.woodChoice.Items.AddRange(new object[] {
-            "Laminate",
-            "Oak",
-            "Rosewood",
-            "Veneer",
-            "Pine"});
-            this.woodChoice.Location = new System.Drawing.Point(164, 236);
-            this.woodChoice.MaxDropDownItems = 5;
-            this.woodChoice.Name = "woodChoice";
-            this.woodChoice.Size = new System.Drawing.Size(121, 21);
-            this.woodChoice.TabIndex = 34;
+            this.materialChoice.FormattingEnabled = true;
+            this.materialChoice.Location = new System.Drawing.Point(164, 236);
+            this.materialChoice.MaxDropDownItems = 5;
+            this.materialChoice.Name = "materialChoice";
+            this.materialChoice.Size = new System.Drawing.Size(121, 21);
+            this.materialChoice.TabIndex = 34;
             // 
             // rushOrderDays
             // 
@@ -272,7 +266,7 @@
             this.Controls.Add(this.widthError);
             this.Controls.Add(this.depthError);
             this.Controls.Add(this.rushOrderDays);
-            this.Controls.Add(this.woodChoice);
+            this.Controls.Add(this.materialChoice);
             this.Controls.Add(this.numDrawers);
             this.Controls.Add(this.depthInput);
             this.Controls.Add(this.widthInput);
@@ -314,7 +308,7 @@
         private System.Windows.Forms.NumericUpDown widthInput;
         private System.Windows.Forms.NumericUpDown depthInput;
         private System.Windows.Forms.NumericUpDown numDrawers;
-        private System.Windows.Forms.ComboBox woodChoice;
+        private System.Windows.Forms.ComboBox materialChoice;
         private System.Windows.Forms.ComboBox rushOrderDays;
         private System.Windows.Forms.Label depthError;
         private System.Windows.Forms.Label widthError;
