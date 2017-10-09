@@ -46,5 +46,12 @@ namespace MegaDesk_3_MarcoMorley1
             //this.Hide();
             viewquotes.Show();
         }
+
+        private void searchQuote_Click(object sender, EventArgs e)
+        {
+            searchQuotes searchQuote = new searchQuotes();
+            //this.Hide();
+            searchQuote.Show();
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace MegaDesk_3_MarcoMorley1
         public ViewAllQuotes()
         {
             InitializeComponent();
-            string path = ".\\quotes.txt";
+            string path = ".\\quotes.json";
             if (!File.Exists(path))
             {
                 return; 
